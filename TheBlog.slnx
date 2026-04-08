@@ -1,6 +1,6 @@
 <Solution>
-  <Project Path="TheBlog.API/TheBlog.API.csproj" />
-  <Project Path="TheBlog.Application/TheBlog.Application.csproj" />
-  <Project Path="TheBlog.Domain/TheBlog.Domain.csproj" />
-  <Project Path="TheBlog.Infra/TheBlog.Infra.csproj" />
+  <Project Path="src/TheBlog.API/TheBlog.API.csproj" />
+  <Project Path="src/TheBlog.Application/TheBlog.Application.csproj" />
+  <Project Path="src/TheBlog.Domain/TheBlog.Domain.csproj" />
+  <Project Path="src/TheBlog.Infra/TheBlog.Infra.csproj" />
 </Solution>

@@ -13,4 +13,6 @@ public class UserRepository : IUserRepository
     public async Task Add(User user) => await _context.Users.AddAsync(user);
 
     public async Task<bool> ExistActiveUserWithEmail(string email) => await _context.Users.AnyAsync(user => user.Active && user.Email.Equals(email));
+
+    public Task<User?> GetByEmail(string email) => _context.Users.AsNoTracking().FirstOrDefaultAsync(user => user.Active && user.Email.Equals(email));
 }

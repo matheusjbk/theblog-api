@@ -3,9 +3,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TheBlog.Domain.Repositories;
 using TheBlog.Domain.Security.Cryptography;
+using TheBlog.Domain.Security.Tokens;
 using TheBlog.Infra.DataAccess;
 using TheBlog.Infra.DataAccess.Repositories;
 using TheBlog.Infra.Security.Cryptography;
+using TheBlog.Infra.Security.Tokens.AccessToken;
 
 namespace TheBlog.Infra;
 
@@ -16,6 +18,7 @@ public static class InfraDependencyInjectionExtensions
         AddDbContext_SqlServer(services, configuration);
         AddRepositories(services);
         AddPasswordEncrypter(services);
+        AddTokens(services, configuration);
     }
 
     private static void AddDbContext_SqlServer(IServiceCollection services, IConfiguration configuration)
@@ -35,4 +38,12 @@ public static class InfraDependencyInjectionExtensions
     }
 
     private static void AddPasswordEncrypter(IServiceCollection services) => services.AddScoped<IPasswordEncrypter, BCryptNet>();
+
+    private static void AddTokens(IServiceCollection services, IConfiguration configuration)
+    {
+        var expirationTimeInMinutes = configuration.GetValue<uint>("Settings:Jwt:ExpirationTimeInMinutes");
+        var signingKey = configuration.GetValue<string>("Settings:Jwt:SigningKey")!;
+
+        services.AddScoped<IAccessTokenGenerator>(provider => new JwtGenerator(expirationTimeInMinutes, signingKey));
+    }
 }

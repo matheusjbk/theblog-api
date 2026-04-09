@@ -45,5 +45,6 @@ public static class InfraDependencyInjectionExtensions
         var signingKey = configuration.GetValue<string>("Settings:Jwt:SigningKey")!;
 
         services.AddScoped<IAccessTokenGenerator>(provider => new JwtGenerator(expirationTimeInMinutes, signingKey));
+        services.AddScoped<IAccessTokenValidator>(provider => new JwtValidator(signingKey));
     }
 }

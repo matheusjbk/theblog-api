@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using TheBlog.API.Attributes;
 using TheBlog.Application.Communication.Requests;
 using TheBlog.Application.Communication.Responses;
 using TheBlog.Application.UseCases.User.Register;
@@ -26,5 +27,16 @@ public class UserController : TheBlogBaseController
         }
 
         return Created(string.Empty, result.Value);
+    }
+
+    [AuthenticatedUser]
+    [HttpGet]
+    public async Task<IActionResult> GetUserProfile(IHttpContextAccessor httpContextAccessor)
+    {
+        var user = httpContextAccessor.HttpContext!.Items["LoggedUser"];
+
+        if (user is not null) return Ok(user);
+
+        return NotFound();
     }
 }

@@ -4,6 +4,8 @@ using TheBlog.API.Attributes;
 using TheBlog.Application.Communication.Requests;
 using TheBlog.Application.Communication.Responses;
 using TheBlog.Application.UseCases.User.ChangePassword;
+using TheBlog.Application.UseCases.User.Delete;
+using TheBlog.Application.UseCases.User.Profile;
 using TheBlog.Application.UseCases.User.Register;
 using TheBlog.Application.UseCases.User.Update;
 using TheBlog.Domain.Entities;
@@ -68,14 +70,25 @@ public class UserController : TheBlogBaseController
         return NoContent();
     }
 
-    //[HttpGet("me")]
-    //[AuthenticatedUser]
-    //public async Task<IActionResult> GetUserProfile(IHttpContextAccessor httpContextAccessor)
-    //{
-    //    var user = httpContextAccessor.HttpContext!.Items["LoggedUser"];
+    [HttpGet("me")]
+    [ProducesResponseType(typeof(RegisteredUserResponse), StatusCodes.Status200OK)]
+    [AuthenticatedUser]
+    public async Task<IActionResult> GetUserProfile(IGetUserProfileUseCase useCase, IHttpContextAccessor httpContextAccessor)
+    {
+        var loggedUser = httpContextAccessor.HttpContext!.Items["LoggedUser"] as User;
 
-    //    if (user is not null) return Ok(user);
+        return Ok(await useCase.Execute(loggedUser!));
+    }
 
-    //    return NotFound();
-    //}
+    [HttpDelete("me")]
+    [ProducesResponseType(typeof(RegisteredUserResponse), StatusCodes.Status204NoContent)]
+    [AuthenticatedUser]
+    public async Task<IActionResult> Delete(IDeleteUserUseCase useCase, IHttpContextAccessor httpContextAccessor)
+    {
+        var loggedUser = httpContextAccessor.HttpContext!.Items["LoggedUser"] as User;
+
+        _ = await useCase.Execute(loggedUser!);
+
+        return NoContent();
+    }
 }

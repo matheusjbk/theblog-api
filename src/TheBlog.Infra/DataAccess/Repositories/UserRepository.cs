@@ -21,4 +21,6 @@ public class UserRepository : IUserRepository
     public async Task<User> GetToUpdateById(Guid id) => await _context.Users.FirstAsync(user => user.Active && user.Id.Equals(id));
 
     public void Update(User user) => _context.Users.Update(user);
+
+    public void Delete(User user) => _context.Users.Remove(user);
 }

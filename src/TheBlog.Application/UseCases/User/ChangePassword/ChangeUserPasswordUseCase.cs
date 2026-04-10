@@ -28,6 +28,7 @@ public class ChangeUserPasswordUseCase : IChangeUserPasswordUseCase
         var user = await _userRepository.GetToUpdateById(loggedUser.Id);
 
         user.Password = _passwordEncrypter.Encrypt(request.NewPassword);
+        user.UpdatedAt = DateTime.UtcNow;
 
         _userRepository.Update(user);
         await _unitOfWork.CommitAsync();

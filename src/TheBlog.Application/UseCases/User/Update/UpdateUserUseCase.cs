@@ -28,6 +28,7 @@ public class UpdateUserUseCase : IUpdateUserUseCase
 
         user.Name = request.Name ?? user.Name;
         user.Email = request.Email ?? user.Email;
+        user.UpdatedAt = DateTime.UtcNow;
 
         _userRepository.Update(user);
         await _unitOfWork.CommitAsync();

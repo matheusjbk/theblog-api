@@ -10,4 +10,5 @@ public interface IUserRepository
     Task<User?> GetById(Guid id);
     Task<User> GetToUpdateById(Guid id);
     void Update(User user);
+    void Delete(User user);
 }

@@ -25,7 +25,7 @@ public class DoLoginUseCase : IDoLoginUseCase
     {
         var user = await _userRepository.GetByEmail(request.Email);
 
-        if (user is null || !_passwordEncrypter.IsValid(request.Password, user.Password)) return ResultValue<LoginResponse>.Failure(new UnauthorizedError(""));
+        if (user is null || !_passwordEncrypter.IsValid(request.Password, user.Password)) return ResultValue<LoginResponse>.Failure(new UnauthorizedError("E-mail or password incorrect"));
 
         var loginResponse = new LoginResponse
         {

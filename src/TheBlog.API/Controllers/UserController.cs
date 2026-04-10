@@ -4,6 +4,8 @@ using TheBlog.API.Attributes;
 using TheBlog.Application.Communication.Requests;
 using TheBlog.Application.Communication.Responses;
 using TheBlog.Application.UseCases.User.Register;
+using TheBlog.Application.UseCases.User.Update;
+using TheBlog.Domain.Entities;
 using TheBlog.Domain.Errors;
 
 namespace TheBlog.API.Controllers;
@@ -29,14 +31,35 @@ public class UserController : TheBlogBaseController
         return Created(string.Empty, result.Value);
     }
 
+    [HttpPatch("me")]
+    [ProducesResponseType(typeof(RegisteredUserResponse), StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(IError), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(IError), StatusCodes.Status409Conflict)]
     [AuthenticatedUser]
-    [HttpGet]
-    public async Task<IActionResult> GetUserProfile(IHttpContextAccessor httpContextAccessor)
+    public async Task<IActionResult> Update(IUpdateUserUseCase useCase, UpdateUserRequest request, IHttpContextAccessor contextAccessor)
     {
-        var user = httpContextAccessor.HttpContext!.Items["LoggedUser"];
+        var loggedUser = contextAccessor.HttpContext!.Items["LoggedUser"] as User;
 
-        if (user is not null) return Ok(user);
+        var result = await useCase.Execute(request, loggedUser!);
 
-        return NotFound();
+        if(!result.IsSuccess)
+        {
+            if(result.Error!.StatusCode == HttpStatusCode.Conflict) return Conflict(result.Error);
+
+            if(result.Error!.StatusCode == HttpStatusCode.BadRequest) return BadRequest(result.Error);
+        }
+
+        return NoContent();
     }
+
+    //[HttpGet("me")]
+    //[AuthenticatedUser]
+    //public async Task<IActionResult> GetUserProfile(IHttpContextAccessor httpContextAccessor)
+    //{
+    //    var user = httpContextAccessor.HttpContext!.Items["LoggedUser"];
+
+    //    if (user is not null) return Ok(user);
+
+    //    return NotFound();
+    //}
 }

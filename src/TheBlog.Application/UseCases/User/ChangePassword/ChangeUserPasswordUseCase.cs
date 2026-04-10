@@ -1,4 +1,5 @@
-﻿using TheBlog.Application.Communication.Requests;
+﻿using TheBlog.Application.Communication;
+using TheBlog.Application.Communication.Requests;
 using TheBlog.Domain.Errors;
 using TheBlog.Domain.Primitives;
 using TheBlog.Domain.Repositories;
@@ -41,7 +42,7 @@ public class ChangeUserPasswordUseCase : IChangeUserPasswordUseCase
         var validationResult = new ChangePasswordValidator().Validate(request);
 
         if (!_passwordEncrypter.IsValid(request.CurrentPassword, user.Password))
-            return Result.Failure(new ValidationError(["Current password is incorrect"]));
+            return Result.Failure(new ValidationError([ErrorMessages.DIFFERENT_CURRENT_PASSWORD]));
 
         if (!validationResult.IsValid)
         {

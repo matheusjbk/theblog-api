@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.Validators;
+using TheBlog.Application.Communication;
 
 namespace TheBlog.Application.SharedValidators;
 
@@ -11,13 +12,13 @@ internal class PasswordValidator<T> : PropertyValidator<T, string>
     {
         if(string.IsNullOrWhiteSpace(password))
         {
-            context.MessageFormatter.AppendArgument("ErrorMessage", "Password is required");
+            context.MessageFormatter.AppendArgument("ErrorMessage", ErrorMessages.EMPTY_PASSWORD);
             return false;
         }
 
         if(password.Length <= 5)
         {
-            context.MessageFormatter.AppendArgument("ErrorMessage", "Password must be at least 6 characters long");
+            context.MessageFormatter.AppendArgument("ErrorMessage", ErrorMessages.INVALID_PASSWORD);
             return false;
         }
 

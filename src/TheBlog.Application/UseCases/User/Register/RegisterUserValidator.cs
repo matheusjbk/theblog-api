@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using TheBlog.Application.Communication;
 using TheBlog.Application.Communication.Requests;
 using TheBlog.Application.SharedValidators;
 
@@ -8,10 +9,10 @@ public class RegisterUserValidator : AbstractValidator<RegisterUserRequest>
 {
     public RegisterUserValidator()
     {
-        RuleFor(request => request.Name).NotEmpty().WithMessage("Name is required");
-        RuleFor(request => request.Email).NotEmpty().WithMessage("Email is required");
+        RuleFor(request => request.Name).NotEmpty().WithMessage(ErrorMessages.EMPTY_NAME);
+        RuleFor(request => request.Email).NotEmpty().WithMessage(ErrorMessages.EMPTY_EMAIL);
         RuleFor(request => request.Password).SetValidator(new PasswordValidator<RegisterUserRequest>());
 
-        When(request => !string.IsNullOrEmpty(request.Email), () => RuleFor(request => request.Email).EmailAddress().WithMessage("Email must be a valid e-mail address"));
+        When(request => !string.IsNullOrEmpty(request.Email), () => RuleFor(request => request.Email).EmailAddress().WithMessage(ErrorMessages.INVALID_EMAIL));
     }
 }

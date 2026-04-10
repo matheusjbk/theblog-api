@@ -1,4 +1,5 @@
-﻿using TheBlog.Application.Communication.Requests;
+﻿using TheBlog.Application.Communication;
+using TheBlog.Application.Communication.Requests;
 using TheBlog.Application.Communication.Responses;
 using TheBlog.Application.MappingConfigurations;
 using TheBlog.Domain.Errors;
@@ -43,7 +44,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 
         var emailExistsInDb = await _userRepository.ExistActiveUserWithEmail(request.Email);
 
-        if (emailExistsInDb) return Result.Failure(new ConflictError("Email already registered in database"));
+        if (emailExistsInDb) return Result.Failure(new ConflictError(ErrorMessages.EMAIL_ALREADY_REGISTERED));
 
         if (!validationResult.IsValid)
         {

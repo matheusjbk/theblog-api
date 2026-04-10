@@ -1,4 +1,5 @@
-﻿using TheBlog.Application.Communication.Requests;
+﻿using TheBlog.Application.Communication;
+using TheBlog.Application.Communication.Requests;
 using TheBlog.Application.Communication.Responses;
 using TheBlog.Domain.Errors;
 using TheBlog.Domain.Primitives;
@@ -25,7 +26,7 @@ public class DoLoginUseCase : IDoLoginUseCase
     {
         var user = await _userRepository.GetByEmail(request.Email);
 
-        if (user is null || !_passwordEncrypter.IsValid(request.Password, user.Password)) return ResultValue<LoginResponse>.Failure(new UnauthorizedError("E-mail or password incorrect"));
+        if (user is null || !_passwordEncrypter.IsValid(request.Password, user.Password)) return ResultValue<LoginResponse>.Failure(new UnauthorizedError(ErrorMessages.INVALID_LOGIN));
 
         var loginResponse = new LoginResponse
         {

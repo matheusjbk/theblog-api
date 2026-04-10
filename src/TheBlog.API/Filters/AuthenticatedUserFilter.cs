@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.IdentityModel.Tokens;
+using TheBlog.Application.Communication;
 using TheBlog.Domain.Errors;
 using TheBlog.Domain.Repositories;
 using TheBlog.Domain.Security.Tokens;
@@ -24,7 +25,7 @@ public class AuthenticatedUserFilter : IAsyncAuthorizationFilter
 
         if(token is null)
         {
-            context.Result = new UnauthorizedObjectResult(new UnauthorizedError("Missing Authorization Token"));
+            context.Result = new UnauthorizedObjectResult(new UnauthorizedError(ErrorMessages.NO_TOKEN));
             return;
         }
 
@@ -35,7 +36,7 @@ public class AuthenticatedUserFilter : IAsyncAuthorizationFilter
 
             if(user is null)
             {
-                context.Result = new UnauthorizedObjectResult(new UnauthorizedError("User without permission"));
+                context.Result = new UnauthorizedObjectResult(new UnauthorizedError(ErrorMessages.USER_WITHOUT_PERMISSION));
             }
 
             context.HttpContext.Items["LoggedUser"] = user;
@@ -46,7 +47,7 @@ public class AuthenticatedUserFilter : IAsyncAuthorizationFilter
         }
         catch
         {
-            context.Result = new UnauthorizedObjectResult(new UnauthorizedError("User without permission"));
+            context.Result = new UnauthorizedObjectResult(new UnauthorizedError(ErrorMessages.USER_WITHOUT_PERMISSION));
         }
     }
 

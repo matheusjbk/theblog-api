@@ -56,7 +56,6 @@ public class UserController : TheBlogBaseController
     [HttpPatch("me/password")]
     [ProducesResponseType(typeof(RegisteredUserResponse), StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(IError), StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(typeof(IError), StatusCodes.Status409Conflict)]
     [AuthenticatedUser]
     public async Task<IActionResult> ChangePassword(IChangeUserPasswordUseCase useCase, ChangePasswordRequest request, IHttpContextAccessor contextAccessor)
     {

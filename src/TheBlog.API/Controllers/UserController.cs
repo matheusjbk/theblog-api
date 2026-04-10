@@ -3,6 +3,7 @@ using System.Net;
 using TheBlog.API.Attributes;
 using TheBlog.Application.Communication.Requests;
 using TheBlog.Application.Communication.Responses;
+using TheBlog.Application.UseCases.User.ChangePassword;
 using TheBlog.Application.UseCases.User.Register;
 using TheBlog.Application.UseCases.User.Update;
 using TheBlog.Domain.Entities;
@@ -48,6 +49,22 @@ public class UserController : TheBlogBaseController
 
             if(result.Error!.StatusCode == HttpStatusCode.BadRequest) return BadRequest(result.Error);
         }
+
+        return NoContent();
+    }
+
+    [HttpPatch("me/password")]
+    [ProducesResponseType(typeof(RegisteredUserResponse), StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(IError), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(IError), StatusCodes.Status409Conflict)]
+    [AuthenticatedUser]
+    public async Task<IActionResult> ChangePassword(IChangeUserPasswordUseCase useCase, ChangePasswordRequest request, IHttpContextAccessor contextAccessor)
+    {
+        var loggedUser = contextAccessor.HttpContext!.Items["LoggedUser"] as User;
+
+        var result = await useCase.Execute(request, loggedUser!);
+
+        if (!result.IsSuccess) return BadRequest(result.Error);
 
         return NoContent();
     }

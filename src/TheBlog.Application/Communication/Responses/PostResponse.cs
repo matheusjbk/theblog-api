@@ -8,8 +8,6 @@ public class PostResponse
     public string Content { get; set; } = string.Empty;
     public string Excerpt { get; set; } = string.Empty;
     public string CoverImageUrl { get; set; } = string.Empty;
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
     public bool Active { get; set; }
     public RegisteredUserResponse Author { get; set; } = default!;
 }

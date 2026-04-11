@@ -8,6 +8,7 @@ public class TheBlogDbContext : DbContext
     public TheBlogDbContext(DbContextOptions<TheBlogDbContext> options) : base(options) { }
 
     public DbSet<User> Users { get; set; }
+    public DbSet<Post> Posts { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) =>
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(TheBlogDbContext).Assembly);

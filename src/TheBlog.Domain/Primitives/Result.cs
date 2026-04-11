@@ -20,7 +20,7 @@ public class Result
 public class ResultValue<T> : Result
 {
     private readonly T? _value;
-    public T? Value => IsSuccess ? _value : throw new InvalidOperationException("Não é possível acessar o valor de um resultado de uma falha.");
+    public T? Value => IsSuccess ? _value : default;
 
     protected ResultValue(T? value, bool isSuccess, IError? error) : base(isSuccess, error) => _value = value;
 

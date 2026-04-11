@@ -16,6 +16,18 @@ public static class MapsExtensions
         };
     }
 
+    public static Post ToPostEntity(this PostRequest request)
+    {
+        return new Post
+        {
+            Title = request.Title,
+            Excerpt = request.Excerpt,
+            Content = request.Content,
+            CoverImageUrl = request.CoverImageUrl,
+            Active = request.Active,
+        };
+    }
+
     // Entity to Response
     public static RegisteredUserResponse ToRegisteredUserResponse(this User user)
     {
@@ -23,6 +35,20 @@ public static class MapsExtensions
         {
             Name = user.Name,
             Email = user.Email
+        };
+    }
+
+    public static PostResponse ToPostResponse(this Post post)
+    {
+        return new PostResponse
+        {
+            Id = post.Id,
+            Title = post.Title,
+            Slug = post.Slug,
+            Excerpt = post.Excerpt,
+            Content = post.Content,
+            CoverImageUrl = post.CoverImageUrl,
+            Active = post.Active,
         };
     }
 }

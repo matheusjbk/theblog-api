@@ -9,6 +9,7 @@ public class UserConfiguration : EntityBaseConfiguration<User>
     public override void Configure(EntityTypeBuilder<User> builder)
     {
         builder.ToTable("Users");
+        builder.HasIndex(user => user.Email).IsUnique();
 
         base.Configure(builder);
         

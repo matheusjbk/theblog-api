@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using TheBlog.Application.UseCases.Auth.Login;
+using TheBlog.Application.UseCases.Post.Register;
 using TheBlog.Application.UseCases.User.ChangePassword;
 using TheBlog.Application.UseCases.User.Delete;
 using TheBlog.Application.UseCases.User.Profile;
@@ -22,6 +23,8 @@ public static class ApplicationDependencyInjectionExtensions
         services.AddScoped<IChangeUserPasswordUseCase, ChangeUserPasswordUseCase>();
         services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
         services.AddScoped<IDeleteUserUseCase, DeleteUserUseCase>();
+
+        services.AddScoped<IRegisterPostUseCase, RegisterPostUseCase>();
 
         services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
     }

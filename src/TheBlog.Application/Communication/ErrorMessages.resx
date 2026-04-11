@@ -123,14 +123,26 @@
   <data name="EMAIL_ALREADY_REGISTERED" xml:space="preserve">
     <value>E-mail address has already been registered.</value>
   </data>
+  <data name="EMPTY_CONTENT" xml:space="preserve">
+    <value>Content cannot be empty.</value>
+  </data>
+  <data name="EMPTY_COVER_IMAGE_URL" xml:space="preserve">
+    <value>Cover image URL cannot be empty.</value>
+  </data>
   <data name="EMPTY_EMAIL" xml:space="preserve">
     <value>E-mail address cannot be empty.</value>
+  </data>
+  <data name="EMPTY_EXCERPT" xml:space="preserve">
+    <value>Excerpt cannot be empty.</value>
   </data>
   <data name="EMPTY_NAME" xml:space="preserve">
     <value>Name cannot be empty.</value>
   </data>
   <data name="EMPTY_PASSWORD" xml:space="preserve">
     <value>Password cannot be empty.</value>
+  </data>
+  <data name="EMPTY_TITLE" xml:space="preserve">
+    <value>Title cannot be empty.</value>
   </data>
   <data name="INVALID_EMAIL" xml:space="preserve">
     <value>E-mail address is invalid.</value>
@@ -140,6 +152,15 @@
   </data>
   <data name="INVALID_PASSWORD" xml:space="preserve">
     <value>Password must be longer than 5 characters.</value>
+  </data>
+  <data name="INVALID_URL_FORMAT" xml:space="preserve">
+    <value>URL format is invalid.</value>
+  </data>
+  <data name="LONG_EXCERPT" xml:space="preserve">
+    <value>Excerpt must have a maximum of 200 characters.</value>
+  </data>
+  <data name="LONG_TITLE" xml:space="preserve">
+    <value>Title must have a maximum of 150 characters.</value>
   </data>
   <data name="NO_TOKEN" xml:space="preserve">
     <value>Request do not have an access token.</value>

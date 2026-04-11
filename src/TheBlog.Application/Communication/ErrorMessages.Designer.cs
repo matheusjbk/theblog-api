@@ -79,11 +79,38 @@ namespace TheBlog.Application.Communication {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Content cannot be empty..
+        /// </summary>
+        public static string EMPTY_CONTENT {
+            get {
+                return ResourceManager.GetString("EMPTY_CONTENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cover image URL cannot be empty..
+        /// </summary>
+        public static string EMPTY_COVER_IMAGE_URL {
+            get {
+                return ResourceManager.GetString("EMPTY_COVER_IMAGE_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to E-mail address cannot be empty..
         /// </summary>
         public static string EMPTY_EMAIL {
             get {
                 return ResourceManager.GetString("EMPTY_EMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Excerpt cannot be empty..
+        /// </summary>
+        public static string EMPTY_EXCERPT {
+            get {
+                return ResourceManager.GetString("EMPTY_EXCERPT", resourceCulture);
             }
         }
         
@@ -102,6 +129,15 @@ namespace TheBlog.Application.Communication {
         public static string EMPTY_PASSWORD {
             get {
                 return ResourceManager.GetString("EMPTY_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title cannot be empty..
+        /// </summary>
+        public static string EMPTY_TITLE {
+            get {
+                return ResourceManager.GetString("EMPTY_TITLE", resourceCulture);
             }
         }
         
@@ -129,6 +165,33 @@ namespace TheBlog.Application.Communication {
         public static string INVALID_PASSWORD {
             get {
                 return ResourceManager.GetString("INVALID_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to URL format is invalid..
+        /// </summary>
+        public static string INVALID_URL_FORMAT {
+            get {
+                return ResourceManager.GetString("INVALID_URL_FORMAT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Excerpt must have a maximum of 200 characters..
+        /// </summary>
+        public static string LONG_EXCERPT {
+            get {
+                return ResourceManager.GetString("LONG_EXCERPT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title must have a maximum of 150 characters..
+        /// </summary>
+        public static string LONG_TITLE {
+            get {
+                return ResourceManager.GetString("LONG_TITLE", resourceCulture);
             }
         }
         

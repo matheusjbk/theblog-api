@@ -8,4 +8,6 @@ public class Post : EntityBase
     public string Excerpt { get; set; } = string.Empty;
     public string CoverImageUrl { get; set; } = string.Empty;
     public Guid AuthorId { get; set; }
+
+    public User Author { get; set; } = default!;
 }

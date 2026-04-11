@@ -205,6 +205,15 @@ namespace TheBlog.Application.Communication {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Post not found..
+        /// </summary>
+        public static string POST_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("POST_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unknown error..
         /// </summary>
         public static string UNKNOWN_ERROR {

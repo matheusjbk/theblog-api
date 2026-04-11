@@ -165,6 +165,9 @@
   <data name="NO_TOKEN" xml:space="preserve">
     <value>Request do not have an access token.</value>
   </data>
+  <data name="POST_NOT_FOUND" xml:space="preserve">
+    <value>Post not found.</value>
+  </data>
   <data name="UNKNOWN_ERROR" xml:space="preserve">
     <value>Unknown error.</value>
   </data>

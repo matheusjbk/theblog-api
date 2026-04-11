@@ -49,6 +49,13 @@ public static class MapsExtensions
             Content = post.Content,
             CoverImageUrl = post.CoverImageUrl,
             Active = post.Active,
+            Author = post.Author.ToRegisteredUserResponse()
         };
+    }
+
+    public static IEnumerable<PostResponse> ToPostResponseList(this IEnumerable<Post> posts)
+    {
+        foreach (var post in posts)
+            yield return post.ToPostResponse();
     }
 }

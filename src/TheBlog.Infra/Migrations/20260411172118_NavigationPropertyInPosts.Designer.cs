@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheBlog.Infra.DataAccess;
 
@@ -11,9 +12,11 @@ using TheBlog.Infra.DataAccess;
 namespace TheBlog.Infra.Migrations
 {
     [DbContext(typeof(TheBlogDbContext))]
-    partial class TheBlogDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260411172118_NavigationPropertyInPosts")]
+    partial class NavigationPropertyInPosts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

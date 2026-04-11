@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using TheBlog.API.Attributes;
 using TheBlog.Application.Communication.Requests;
 using TheBlog.Application.Communication.Responses;
 using TheBlog.Application.UseCases.Post.GetAllOwned;
 using TheBlog.Application.UseCases.Post.GetByIdOwned;
 using TheBlog.Application.UseCases.Post.Register;
+using TheBlog.Application.UseCases.Post.Update;
 using TheBlog.Domain.Entities;
 using TheBlog.Domain.Errors;
 
@@ -51,5 +53,26 @@ public class PostController : TheBlogBaseController
         var result = await useCase.Execute(loggedUser!);
 
         return Ok(result.Value);
+    }
+
+    [HttpPatch("me/{id}")]
+    [ProducesResponseType(typeof(PostResponse), StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(IError), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(IError), StatusCodes.Status400BadRequest)]
+    [AuthenticatedUser]
+    public async Task<IActionResult> Update(IUpdatePostUseCase useCase, string id, UpdatePostRequest request, IHttpContextAccessor contextAccessor)
+    {
+        var loggedUser = contextAccessor.HttpContext!.Items["LoggedUser"] as User;
+
+        var result = await useCase.Execute(Guid.Parse(id), request, loggedUser!);
+
+        if(!result.IsSuccess)
+        {
+            if(result.Error!.StatusCode == HttpStatusCode.NotFound) return NotFound(result.Error);
+
+            if(result.Error!.StatusCode == HttpStatusCode.BadRequest) return BadRequest(result.Error);
+        }
+
+        return NoContent();
     }
 }

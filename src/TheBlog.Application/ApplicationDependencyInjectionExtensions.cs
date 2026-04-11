@@ -3,6 +3,7 @@ using TheBlog.Application.UseCases.Auth.Login;
 using TheBlog.Application.UseCases.Post.GetAllOwned;
 using TheBlog.Application.UseCases.Post.GetByIdOwned;
 using TheBlog.Application.UseCases.Post.Register;
+using TheBlog.Application.UseCases.Post.Update;
 using TheBlog.Application.UseCases.User.ChangePassword;
 using TheBlog.Application.UseCases.User.Delete;
 using TheBlog.Application.UseCases.User.Profile;
@@ -29,6 +30,7 @@ public static class ApplicationDependencyInjectionExtensions
         services.AddScoped<IRegisterPostUseCase, RegisterPostUseCase>();
         services.AddScoped<IGetPostByIdOwnedUseCase, GetPostByIdOwnedUseCase>();
         services.AddScoped<IGetAllPostsOwnedUseCase, GetAllPostsOwnedUseCase>();
+        services.AddScoped<IUpdatePostUseCase, UpdatePostUseCase>();
 
         services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
     }

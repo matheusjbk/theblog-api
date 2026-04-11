@@ -16,8 +16,12 @@ public class PostRepository : IPostRepository
         await _context.Posts.Include(post => post.Author)
         .AsNoTracking().FirstOrDefaultAsync(post => post.Id == id && post.AuthorId == user.Id);
 
-    public async Task<Post?> GetById(Guid id) =>
-        await _context.Posts.AsNoTracking().FirstOrDefaultAsync(post => post.Id == id);
+    public async Task<Post?> GetByIdToUpdate(Guid id, User user) =>
+        await _context.Posts.Include(post => post.Author)
+        .FirstOrDefaultAsync(post => post.Id == id && post.AuthorId == user.Id);
+
+    public async Task<Post?> GetBySlug(string slug) =>
+        await _context.Posts.AsNoTracking().FirstOrDefaultAsync(post => post.Slug == slug);
 
     public async Task<IEnumerable<Post>> GetAllOwned(User user) =>
         await _context.Posts.Include(post => post.Author)
@@ -25,4 +29,6 @@ public class PostRepository : IPostRepository
 
     public async Task<IEnumerable<Post>> GetAll() =>
         await _context.Posts.AsNoTracking().ToListAsync();
+
+    public async void Update(Post post) => _context.Posts.Update(post);
 }

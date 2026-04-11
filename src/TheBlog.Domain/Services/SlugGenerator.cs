@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -13,7 +14,9 @@ public static partial class SlugGenerator
         string slug = RemoveAccents(text).ToLowerInvariant();
         slug = InvalidCharsRegex().Replace(slug, "");
 
-        return MultipleHyphensRegex().Replace(slug, "-").Trim('-');
+        string suffix = Convert.ToHexString(RandomNumberGenerator.GetBytes(3)).ToLower();
+
+        return $"{MultipleHyphensRegex().Replace(slug, "-").Trim('-')}-{suffix}";
     }
 
     private static string RemoveAccents(string text)

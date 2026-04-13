@@ -6,5 +6,5 @@ namespace TheBlog.Application.UseCases.Post.Register;
 
 public interface IRegisterPostUseCase
 {
-    public Task<ResultValue<PostResponse>> Execute(PostRequest request, Domain.Entities.User loggedUser);
+    public Task<ResultValue<RegisteredPostResponse>> Execute(RegisterPostRequest request, Domain.Entities.User loggedUser);
 }

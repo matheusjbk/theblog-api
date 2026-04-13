@@ -20,7 +20,7 @@ public class PostController : TheBlogBaseController
     [ProducesResponseType(typeof(PostResponse), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(IError), StatusCodes.Status400BadRequest)]
     [AuthenticatedUser]
-    public async Task<IActionResult> Register(IRegisterPostUseCase useCase, PostRequest request, IHttpContextAccessor contextAccessor)
+    public async Task<IActionResult> Register(IRegisterPostUseCase useCase, RegisterPostRequest request, IHttpContextAccessor contextAccessor)
     {
         var loggedUser = contextAccessor.HttpContext!.Items["LoggedUser"] as User;
 

@@ -16,7 +16,7 @@ public static class MapsExtensions
         };
     }
 
-    public static Post ToPostEntity(this PostRequest request)
+    public static Post ToPostEntity(this RegisterPostRequest request)
     {
         return new Post
         {
@@ -35,6 +35,16 @@ public static class MapsExtensions
         {
             Name = user.Name,
             Email = user.Email
+        };
+    }
+
+    public static RegisteredPostResponse ToRegisteredPostResponse(this Post post)
+    {
+        return new RegisteredPostResponse
+        {
+            Id = post.Id,
+            Title = post.Title,
+            Slug = post.Slug,
         };
     }
 

@@ -1,6 +1,6 @@
 ﻿namespace TheBlog.Application.Communication.Requests;
 
-public class PostRequest
+public class RegisterPostRequest
 {
     public string Title { get; set; } = string.Empty;
     public string Excerpt { get; set; } = string.Empty;

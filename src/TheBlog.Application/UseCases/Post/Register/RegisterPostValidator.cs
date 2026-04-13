@@ -4,7 +4,7 @@ using TheBlog.Application.Communication.Requests;
 
 namespace TheBlog.Application.UseCases.Post.Register;
 
-public class RegisterPostValidator : AbstractValidator<PostRequest>
+public class RegisterPostValidator : AbstractValidator<RegisterPostRequest>
 {
     public RegisterPostValidator()
     {

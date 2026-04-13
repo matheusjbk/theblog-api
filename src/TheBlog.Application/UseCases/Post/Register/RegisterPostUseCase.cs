@@ -19,11 +19,11 @@ public class RegisterPostUseCase : IRegisterPostUseCase
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<ResultValue<PostResponse>> Execute(PostRequest request, Domain.Entities.User loggedUser)
+    public async Task<ResultValue<RegisteredPostResponse>> Execute(RegisterPostRequest request, Domain.Entities.User loggedUser)
     {
         var validationResult = await Validate(request);
 
-        if(!validationResult.IsSuccess) return ResultValue<PostResponse>.Failure(validationResult.Error!);
+        if(!validationResult.IsSuccess) return ResultValue<RegisteredPostResponse>.Failure(validationResult.Error!);
 
         var post = request.ToPostEntity();
         post.AuthorId = loggedUser.Id;
@@ -32,13 +32,12 @@ public class RegisterPostUseCase : IRegisterPostUseCase
         await _postRepository.Add(post);
         await _unitOfWork.CommitAsync();
 
-        var postResponse = post.ToPostResponse();
-        postResponse.Author = loggedUser.ToRegisteredUserResponse();
+        var postResponse = post.ToRegisteredPostResponse();
 
-        return ResultValue<PostResponse>.Success(postResponse);
+        return ResultValue<RegisteredPostResponse>.Success(postResponse);
     }
 
-    private async Task<Result> Validate(PostRequest request)
+    private async Task<Result> Validate(RegisterPostRequest request)
     {
         var validationResult = new RegisterPostValidator().Validate(request);
 

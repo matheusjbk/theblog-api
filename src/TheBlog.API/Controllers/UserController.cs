@@ -35,7 +35,7 @@ public class UserController : TheBlogBaseController
     }
 
     [HttpPatch("me")]
-    [ProducesResponseType(typeof(RegisteredUserResponse), StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(IError), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(IError), StatusCodes.Status409Conflict)]
     [AuthenticatedUser]
@@ -56,7 +56,7 @@ public class UserController : TheBlogBaseController
     }
 
     [HttpPatch("me/password")]
-    [ProducesResponseType(typeof(RegisteredUserResponse), StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(IError), StatusCodes.Status400BadRequest)]
     [AuthenticatedUser]
     public async Task<IActionResult> ChangePassword(IChangeUserPasswordUseCase useCase, ChangePasswordRequest request, IHttpContextAccessor contextAccessor)
@@ -81,7 +81,7 @@ public class UserController : TheBlogBaseController
     }
 
     [HttpDelete("me")]
-    [ProducesResponseType(typeof(RegisteredUserResponse), StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     [AuthenticatedUser]
     public async Task<IActionResult> Delete(IDeleteUserUseCase useCase, IHttpContextAccessor httpContextAccessor)
     {

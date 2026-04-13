@@ -3,8 +3,11 @@ using System.Net;
 using TheBlog.API.Attributes;
 using TheBlog.Application.Communication.Requests;
 using TheBlog.Application.Communication.Responses;
+using TheBlog.Application.UseCases.Post.Delete;
+using TheBlog.Application.UseCases.Post.GetAll;
 using TheBlog.Application.UseCases.Post.GetAllOwned;
 using TheBlog.Application.UseCases.Post.GetByIdOwned;
+using TheBlog.Application.UseCases.Post.GetBySlug;
 using TheBlog.Application.UseCases.Post.Register;
 using TheBlog.Application.UseCases.Post.Update;
 using TheBlog.Domain.Entities;
@@ -26,6 +29,27 @@ public class PostController : TheBlogBaseController
         if(!result.IsSuccess) return BadRequest(result.Error);
 
         return Created(string.Empty, result.Value);
+    }
+
+    [HttpGet("{slug}")]
+    [ProducesResponseType(typeof(PostResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IError), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetBySlug(IGetPostBySlugUseCase useCase, string slug)
+    {
+        var result = await useCase.Execute(slug);
+
+        if(!result.IsSuccess) return NotFound(result.Error);
+
+        return Ok(result.Value);
+    }
+
+    [HttpGet]
+    [ProducesResponseType(typeof(PostResponse), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetAll(IGetAllPostsUseCase useCase)
+    {
+        var result = await useCase.Execute();
+
+        return Ok(result.Value);
     }
 
     [HttpGet("me/{id}")]
@@ -56,7 +80,7 @@ public class PostController : TheBlogBaseController
     }
 
     [HttpPatch("me/{id}")]
-    [ProducesResponseType(typeof(PostResponse), StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(IError), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(IError), StatusCodes.Status400BadRequest)]
     [AuthenticatedUser]
@@ -72,6 +96,21 @@ public class PostController : TheBlogBaseController
 
             if(result.Error!.StatusCode == HttpStatusCode.BadRequest) return BadRequest(result.Error);
         }
+
+        return NoContent();
+    }
+
+    [HttpDelete("me/{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(IError), StatusCodes.Status404NotFound)]
+    [AuthenticatedUser]
+    public async Task<IActionResult> Delete(IDeletePostUseCase useCase, string id, IHttpContextAccessor contextAccessor)
+    {
+        var loggedUser = contextAccessor.HttpContext!.Items["LoggedUser"] as User;
+
+        var result = await useCase.Execute(Guid.Parse(id), loggedUser!);
+
+        if(!result.IsSuccess) return NotFound(result.Error);
 
         return NoContent();
     }

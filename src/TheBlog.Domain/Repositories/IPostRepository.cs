@@ -11,4 +11,5 @@ public interface IPostRepository
     Task<IEnumerable<Post>> GetAllOwned(User user);
     Task<IEnumerable<Post>> GetAll();
     void Update(Post post);
+    void Delete(Post post);
 }

@@ -205,6 +205,15 @@ namespace TheBlog.Application.Communication {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Only images (PNG, JPG, JPEG, WEBP, GIF) are accepted..
+        /// </summary>
+        public static string ONLY_IMAGES_ACCEPTED {
+            get {
+                return ResourceManager.GetString("ONLY_IMAGES_ACCEPTED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Post not found..
         /// </summary>
         public static string POST_NOT_FOUND {

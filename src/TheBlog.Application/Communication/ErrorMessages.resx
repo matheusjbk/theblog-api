@@ -165,6 +165,9 @@
   <data name="NO_TOKEN" xml:space="preserve">
     <value>Request do not have an access token.</value>
   </data>
+  <data name="ONLY_IMAGES_ACCEPTED" xml:space="preserve">
+    <value>Only images (PNG, JPG, JPEG, WEBP, GIF) are accepted.</value>
+  </data>
   <data name="POST_NOT_FOUND" xml:space="preserve">
     <value>Post not found.</value>
   </data>

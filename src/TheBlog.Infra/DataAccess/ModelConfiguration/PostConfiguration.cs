@@ -9,7 +9,7 @@ public class PostConfiguration : EntityBaseConfiguration<Post>
     public override void Configure(EntityTypeBuilder<Post> builder)
     {
         builder.ToTable("Posts");
-        builder.HasOne(post => post.Author).WithMany().HasForeignKey(post => post.AuthorId);
+        builder.HasOne(post => post.Author).WithMany().HasForeignKey(post => post.AuthorId).OnDelete(DeleteBehavior.Cascade);
         builder.HasIndex(post => post.Slug).IsUnique();
 
         base.Configure(builder);

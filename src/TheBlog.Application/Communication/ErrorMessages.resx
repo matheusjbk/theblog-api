@@ -171,8 +171,14 @@
   <data name="POST_NOT_FOUND" xml:space="preserve">
     <value>Post not found.</value>
   </data>
+  <data name="TOO_MANY_REQUESTS" xml:space="preserve">
+    <value>Too many requests. Please try again later.</value>
+  </data>
   <data name="UNKNOWN_ERROR" xml:space="preserve">
     <value>Unknown error.</value>
+  </data>
+  <data name="UNKNOWN_ERROR_DETAIL" xml:space="preserve">
+    <value>An unexpected error occurred in our system. Please try again later.</value>
   </data>
   <data name="USER_WITHOUT_PERMISSION" xml:space="preserve">
     <value>You cannot access this resource.</value>

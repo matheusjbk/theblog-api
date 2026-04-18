@@ -1,3 +1,5 @@
+using TheBlog.API.Extensions;
+using TheBlog.API.Filters;
 using TheBlog.Application;
 using TheBlog.Infra;
 
@@ -14,15 +16,27 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddInfra(builder.Configuration);
 builder.Services.AddApplication();
 
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
+builder.Services.EnableCors();
+builder.Services.EnableRateLimit();
+
 var app = builder.Build();
+
+app.UseExceptionHandler();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.UseCors("DefaultPolicy");
+
+app.UseRateLimiter();
 
 app.UseStaticFiles();
 

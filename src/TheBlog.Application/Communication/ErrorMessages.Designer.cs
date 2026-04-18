@@ -223,11 +223,29 @@ namespace TheBlog.Application.Communication {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Too many requests. Please try again later..
+        /// </summary>
+        public static string TOO_MANY_REQUESTS {
+            get {
+                return ResourceManager.GetString("TOO_MANY_REQUESTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unknown error..
         /// </summary>
         public static string UNKNOWN_ERROR {
             get {
                 return ResourceManager.GetString("UNKNOWN_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An unexpected error occurred in our system. Please try again later..
+        /// </summary>
+        public static string UNKNOWN_ERROR_DETAIL {
+            get {
+                return ResourceManager.GetString("UNKNOWN_ERROR_DETAIL", resourceCulture);
             }
         }
         

@@ -1,7 +1,9 @@
+using Microsoft.EntityFrameworkCore;
 using TheBlog.API.Extensions;
 using TheBlog.API.Filters;
 using TheBlog.Application;
 using TheBlog.Infra;
+using TheBlog.Infra.DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,4 +48,16 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+MigrateDatabase();
+
 app.Run();
+
+void MigrateDatabase()
+{
+    using var scope = app.Services.CreateScope();
+    var services = scope.ServiceProvider;
+
+    var context = services.GetRequiredService<TheBlogDbContext>();
+    context.Database.Migrate();
+    Console.WriteLine("Migrações aplicadas com sucesso!");
+}

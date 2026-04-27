@@ -1,5 +1,6 @@
 volumes:
   mssql_data:
+  images_uploads:
 
 networks:
   theblog-network:
@@ -39,5 +40,7 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ConnectionStrings__SqlServer: Server=mssql,1433;Database=YourDatabaseName;User Id=sa;Password=YourSecretPassword123!;TrustServerCertificate=True;
+    volumes:
+      - images_uploads:/app/wwwroot/uploads
     networks:
       - theblog-network

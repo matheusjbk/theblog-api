@@ -10,4 +10,6 @@ public class PostResponse
     public string CoverImageUrl { get; set; } = string.Empty;
     public bool Active { get; set; }
     public RegisteredUserResponse Author { get; set; } = default!;
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }

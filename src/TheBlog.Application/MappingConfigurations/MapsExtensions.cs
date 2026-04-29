@@ -60,8 +60,8 @@ public static class MapsExtensions
             CoverImageUrl = post.CoverImageUrl,
             Active = post.Active,
             Author = post.Author.ToRegisteredUserResponse(),
-            CreatedAt = post.CreatedAt,
-            UpdatedAt = post.UpdatedAt,
+            CreatedAt = post.CreatedAt.ToLocalTime(),
+            UpdatedAt = post.UpdatedAt.ToLocalTime(),
         };
     }
 

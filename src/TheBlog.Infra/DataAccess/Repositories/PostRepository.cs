@@ -25,10 +25,10 @@ public class PostRepository : IPostRepository
 
     public async Task<IEnumerable<Post>> GetAllOwned(User user) =>
         await _context.Posts.Include(post => post.Author)
-        .AsNoTracking().Where(post => post.AuthorId == user.Id).ToListAsync();
+        .AsNoTracking().Where(post => post.AuthorId == user.Id).OrderByDescending(post => post.CreatedAt).ToListAsync();
 
     public async Task<IEnumerable<Post>> GetAll() =>
-        await _context.Posts.Include(post => post.Author).AsNoTracking().Where(post => post.Active).ToListAsync();
+        await _context.Posts.Include(post => post.Author).AsNoTracking().Where(post => post.Active).OrderByDescending(post => post.CreatedAt).ToListAsync();
 
     public async void Update(Post post) => _context.Posts.Update(post);
     public async void Delete(Post post) => _context.Posts.Remove(post);

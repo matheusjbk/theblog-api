@@ -4,11 +4,13 @@ volumes:
 
 networks:
   theblog-network:
+    name: theblog-network
     driver: bridge
 
 services:
   mssql:
     image: mcr.microsoft.com/mssql/server:2025-latest
+    container_name: mssql
     restart: always
     environment:
       ACCEPT_EULA: Y
@@ -28,10 +30,11 @@ services:
     ports:
       - 1433:1433
 
-  api:
+  backend:
     build:
       context: .
       dockerfile: src/TheBlog.API/Dockerfile
+    container_name: theblog-backend
     ports:
       - 5000:8080
     depends_on:
